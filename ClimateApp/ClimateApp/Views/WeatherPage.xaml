@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClimateApp.Views.WeatherPage"
+             Title="WeatherPage">
+    <VerticalStackLayout>
+        <Entry x:Name="CidadeEntry"
+               Text="{Binding Cidade}"
+               Placeholder="Digite a sua cidade como no exemplo: São Paulo,br"
+               Margin="10"/>
+        
+        <Button x:Name="BuscarButton"
+                Text="BUSCAR CLIMA"
+                Command="{Binding BuscarCommand}" 
+                Margin="10" />
+
+        <Label x:Name="DescricaoLabel"
+               Text="{Binding Descricao}"
+               Margin="5"/>
+
+        <Label x:Name="TemperaturaLabel"
+               Text="{Binding Temperatura}"
+               Margin="5"/>
+
+        <Label x:Name="TemperaturaMinLabel"
+               Text="{Binding TemperaturaMin}"
+               Margin="5"/>
+
+        <Label x:Name="TemperaturaMaxLabel"
+               Text="{Binding TemperaturaMax}"
+               Margin="5"/>
+
+        <Label x:Name="SensacaoLabel"
+               Text="{Binding Sensacao}"
+               Margin="5"/>
+
+        <Label x:Name="UmidadeLabel"
+               Text="{Binding Umidade}"
+               Margin="5"/>
+    </VerticalStackLayout>
+</ContentPage>

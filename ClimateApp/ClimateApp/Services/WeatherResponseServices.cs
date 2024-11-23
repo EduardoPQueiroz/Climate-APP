@@ -14,11 +14,11 @@ namespace ClimateApp.Services
     internal class WeatherResponseServices
     {
         private HttpClient httpClient;
-        private ObservableCollection<WeatherResponse> weatherResponses; //isso é para um get geral, que traz várias, ou seja uma collection
         private WeatherResponse weatherResponse; //isso é para get específicos, como getbyid por exemplo
         private JsonSerializerOptions jsonSerializerOptions; // configurar/formatar o JSON
         Uri uri = new Uri("http://api.openweathermap.org/data/2.5/weather?q=");
-        String key = "uk&APPID=d1d7451a2cdd07198bbf237dde66f703";
+        String key = "APPID=d1d7451a2cdd07198bbf237dde66f703";
+        String options = "lang=pt_br&units=metric";
 
         public WeatherResponseServices()
         {
@@ -31,33 +31,14 @@ namespace ClimateApp.Services
             };
         }
 
-        public async Task<ObservableCollection<WeatherResponse>> GetInformacoesAsync() // TASK: usado no await
-        {
-
-            try
-            {
-                HttpResponseMessage response = await httpClient.GetAsync(uri);//quero saber todos os posts;
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();// tranforma o conteudo em string;
-                    weatherResponses = JsonSerializer.Deserialize<ObservableCollection<WeatherResponse>>(content, jsonSerializerOptions);
-                }
-            }
-            catch
-            {
-
-            }
-            return weatherResponses;
-        }
-
         public async Task<WeatherResponse> GetWeatherByCidadeAsync(String cidade) // TASK: usado no await
         {
-            Debug.WriteLine("Chamou!! o GetSalaByIdAsync");
+            Debug.WriteLine("Chamou!! o GetWeatherByCidadeAsync");
             WeatherResponse weatherResponse = new WeatherResponse
                 ();
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync($"{uri}{cidade}{key}");//quero saber todos os posts;
+                HttpResponseMessage response = await httpClient.GetAsync($"{uri}{cidade}&{options}&{key}");//quero saber todos os posts;
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();// tranforma o conteudo em string;
