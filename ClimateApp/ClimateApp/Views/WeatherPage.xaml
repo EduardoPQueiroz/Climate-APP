@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClimateApp.Views.WeatherPage"
-             Title="WeatherPage">
+             Title="ClimateApp">
     <VerticalStackLayout>
+        <Image Source="{Binding Icon}"
+               Aspect="AspectFit"
+               HeightRequest="210"
+               WidthRequest="180"
+            />
         <Entry x:Name="CidadeEntry"
                Text="{Binding Cidade}"
                Placeholder="Digite a sua cidade como no exemplo: São Paulo,br"

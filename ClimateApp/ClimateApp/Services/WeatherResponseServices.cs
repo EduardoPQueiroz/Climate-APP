@@ -17,7 +17,7 @@ namespace ClimateApp.Services
         private WeatherResponse weatherResponse; //isso é para get específicos, como getbyid por exemplo
         private JsonSerializerOptions jsonSerializerOptions; // configurar/formatar o JSON
         Uri uri = new Uri("http://api.openweathermap.org/data/2.5/weather?q=");
-        // aqui vai a chave da API String key = ;
+        //String key = "Key da API VEM AQUI";
         String options = "lang=pt_br&units=metric";
 
         public WeatherResponseServices()

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,6 +16,9 @@ namespace ClimateApp.ViewModels
     {
         [ObservableProperty]
         public String cidade;
+
+        [ObservableProperty]
+        public String icon;
 
         [ObservableProperty]
         public String descricao;
@@ -34,13 +38,17 @@ namespace ClimateApp.ViewModels
         [ObservableProperty]
         public String umidade;
 
+
         private WeatherResponseServices weatherResponseService = new WeatherResponseServices();
 
         public ICommand BuscarCommand { get; set; }
         public MainViewModel()
         {
             BuscarCommand = new Command(Buscar);
+
+            Icon = "cerebro.png";
         }
+
 
         public async void Buscar()
         {
@@ -51,12 +59,13 @@ namespace ClimateApp.ViewModels
             }
             WeatherResponse weatherResponse = await weatherResponseService.GetWeatherByCidadeAsync(Cidade);
 
+            Icon = "http://openweathermap.org/img/wn/" + weatherResponse.Weather[0].Icon.ToString() + ".png";
             Descricao = "Descrição: " + weatherResponse.Weather[0].Description;
             Temperatura = "Temperatura atual: " + weatherResponse.Main.Temp.ToString() + " °C";
             TemperaturaMax = "Temperatura máxima: " + weatherResponse.Main.TempMax.ToString() + " °C";
             TemperaturaMin = "Temperatura mínima: " + weatherResponse.Main.TempMin.ToString() + " °C";
             Sensacao = "Sensação térmica: " + weatherResponse.Main.FeelsLike.ToString() + " °C";
-            Umidade = "Umidade" + weatherResponse.Main.Humidity.ToString() + "%";
+            Umidade = "Umidade: " + weatherResponse.Main.Humidity.ToString() + "%";
 
         }
     }
